@@ -76,7 +76,7 @@ try:
     with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "preferences.txt"), 'r') as preferencesFile:
         preferences = json.load(preferencesFile)
 except Exception as e:
-    preferences = dict(dataDir='', assetsDir='')
+    preferences = dict(dataDir='', assetsDir='', mapboxAccessToken='')
 
 class BlenderOsmPreferences(bpy.types.AddonPreferences):
     bl_idname = __name__
@@ -98,7 +98,8 @@ class BlenderOsmPreferences(bpy.types.AddonPreferences):
     
     mapboxAccessToken: bpy.props.StringProperty(
         name = "Mapbox access token",
-        description = "A string token to access overlays from Mapbox company"
+        description = "A string token to access overlays from Mapbox company",
+        default = preferences["mapboxAccessToken"]
     )
     
     osmServer: bpy.props.EnumProperty(
